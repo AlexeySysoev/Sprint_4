@@ -1,12 +1,11 @@
 package UiTests;
-import org.hamcrest.MatcherAssert;
-import static org.hamcrest.CoreMatchers.containsString;
-//import org.junit.Assert;
 import org.junit.Assert;
 import org.junit.Before;
 import PageObject.MainPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.After;
@@ -15,40 +14,115 @@ import org.openqa.selenium.JavascriptExecutor;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
-//import java.util.regex.Matcher;
+
 
 
 public class AboutImportantListTests {
     WebDriver driver;
-    String expected;
-    String result;
+    String[] expectedArr = {
+        "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
+        "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
+        "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
+        "Только начиная с завтрашнего дня. Но скоро станем расторопнее.",
+        "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.",
+        "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.",
+        "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
+        "Да, обязательно. Всем самокатов! И Москве, и Московской области."};
+    int questionNumber;
+
     @Before
     public void preSettings(){
         System.setProperty("webdriver.chrome.driver","C:/WebDriver/bin/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     @Test
-    public void checkAboutImportantListPanelText(){
-        //driver.get("https://qa-scooter.praktikum-services.ru/");
+    public void checkAboutImportantQuestionsPriceAnswerText(){
+        questionNumber = 0;
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
-        WebElement element = driver.findElement(By.id("accordion__heading-0"));
-        ((JavascriptExecutor) driver)
-                .executeScript(
-                        "arguments[0].scrollIntoView();",
-                        element
-                );
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
 
-        //mainPage.liAboutImportanteClick("0");
-        driver.findElement(By.xpath(".//div[@id='accordion__heading-0']")).click();
-        expected = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
-        result = driver.findElement(By.xpath(".//div[@id='accordion__panel-0']/p")).getText();
-        Assert.assertEquals(expected, result);
+    }
 
+    @Test
+    public void checkAboutImportantQuestionsCountAnswerText(){
+        questionNumber = 1;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
 
+    }
 
+    @Test
+    public void checkAboutImportantQuestionsRentAnswerText(){
+        questionNumber = 2;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
+
+    }
+    @Test
+    public void checkAboutImportantQuestionsDateOfOrderAnswerText() {
+        questionNumber = 3;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
+    }
+    @Test
+    public void checkAboutImportantQuestionsChangeOrderAnswerText(){
+        questionNumber = 4;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
+    }
+
+    @Test
+    public void checkAboutImportantQuestionsChargePowerAnswerText(){
+        questionNumber = 5;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
+    }
+
+    @Test
+    public void checkAboutImportantQuestionsCancelOrderAnswerText(){
+        questionNumber = 6;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
+    }
+    @Test
+    public void checkAboutImportantQuestionsLocationDeliveryAnswerText(){
+        questionNumber = 7;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        mainPage.scroll(questionNumber);
+        mainPage.liAboutImportantClick(questionNumber);
+        mainPage.wait(questionNumber);
+        Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
     }
     @After
     public void teardown(){
