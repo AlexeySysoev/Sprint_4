@@ -13,7 +13,7 @@ public class MainPage {
     private WebDriver driver;
 
     //Локаторы Вопросов списка Вопросов о важном
-    By[] aboutImpotantQuestionXpath = {By.xpath(".//div[@id='accordion__heading-0']"),
+    private By[] aboutImpotantQuestionXpath = {By.xpath(".//div[@id='accordion__heading-0']"),
             By.xpath(".//div[@id='accordion__heading-1']"),
             By.xpath(".//div[@id='accordion__heading-2']"),
             By.xpath(".//div[@id='accordion__heading-3']"),
@@ -23,7 +23,7 @@ public class MainPage {
             By.xpath(".//div[@id='accordion__heading-7']")};
 
     //Локаторы Ответов списка Вопросов о важном
-    By[] aboutImpotantAnswerXpath = {By.xpath(".//div[@id='accordion__panel-0']/p"),
+    private By[] aboutImpotantAnswerXpath = {By.xpath(".//div[@id='accordion__panel-0']/p"),
             By.xpath(".//div[@id='accordion__panel-1']/p"),
             By.xpath(".//div[@id='accordion__panel-2']/p"),
             By.xpath(".//div[@id='accordion__panel-3']/p"),

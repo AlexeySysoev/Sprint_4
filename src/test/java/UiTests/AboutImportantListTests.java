@@ -2,24 +2,22 @@ package UiTests;
 import org.junit.Assert;
 import org.junit.Before;
 import PageObject.MainPage;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.After;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
-//import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.time.Duration;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
 
 
 
 public class AboutImportantListTests {
-    WebDriver driver;
-    String[] expectedArr = {
+    private WebDriver driver;
+    private String[] expectedArr = {
         "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
         "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
         "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
@@ -28,13 +26,17 @@ public class AboutImportantListTests {
         "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.",
         "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
         "Да, обязательно. Всем самокатов! И Москве, и Московской области."};
-    int questionNumber;
+    private int questionNumber;
 
     @Before
     public void preSettings(){
         System.setProperty("webdriver.chrome.driver","C:/WebDriver/bin/chromedriver.exe");
+        //System.setProperty("webdriver.gecko.driver","C:/WebDriver/bin/geckodriver.exe");
         driver = new ChromeDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        /*driver = new FirefoxDriver();
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setAcceptInsecureCerts(false);*/
+
     }
 
     @Test
