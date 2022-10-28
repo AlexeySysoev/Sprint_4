@@ -49,6 +49,8 @@ public class MainPage {
     }
     //клик по кнопке "Заказать" в хедере
     public void orderHeaderButtonClick(){
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(orderHeaderButton));
         driver.findElement(orderHeaderButton).click();
     }
     //клик по кнопке "Заказать" в контенте
