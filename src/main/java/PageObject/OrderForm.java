@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class OrderForm {
@@ -30,6 +29,11 @@ public class OrderForm {
     /* Локаторы формы "Про аренду"*/
     //инпут Когда привезти самокат
     private By samokatDeliveryDate = By.xpath(".//input[contains(@placeholder,'Когда привезти самокат')]");
+    //локаторы выбора даты из календаря
+    //выбор станций метро из селектора
+    private By[] dateOfDeliverySelect = {By.xpath(".//div[contains(@aria-label, '28')]"),
+                                       By.xpath(".//div[contains(@aria-label, '29')]")
+    };
     //инпут Срок аренды
     private By rentDurationInput = By.xpath(".//div[contains(text(),'Срок аренды')]");
     //элемент селектора Срока аренды
@@ -44,6 +48,8 @@ public class OrderForm {
     private By formForRentOrderButton = By.xpath(".//div[@class='Order_Content__bmtHS']//button[text()='Заказать']");
     //Кнопка "Да" модального окна подтверждения заказа
     private By modalWindowApproveButton = By.xpath(".//button[text()='Да']");
+    //Блок с текстом Модального окна для проверки создания заказа
+    private By modalWindowText = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']");
     private WebDriver driver;
     //конструктор
     public OrderForm (WebDriver driver){
@@ -90,11 +96,11 @@ public class OrderForm {
     }
     /* Форма "Про аренду" */
     //выбор даты доставки
-    public void samokatDeliveryDateSelect(){
+    public void samokatDeliveryDateSelect(int variantOfTestData){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(samokatDeliveryDate));
         driver.findElement(samokatDeliveryDate).click();
-        driver.findElement(By.xpath(".//div[contains(@aria-label, '28')]")).click();
+        driver.findElement(dateOfDeliverySelect[variantOfTestData]).click();
     }
     //выбор срока аренды
     public void rentDurationSelect() {
@@ -131,8 +137,8 @@ public class OrderForm {
                 .until(ExpectedConditions.elementToBeClickable(modalWindowApproveButton));
         driver.findElement(modalWindowApproveButton).click();
     }
-    public boolean checkModalWindowSuccessOrderIsExist(){
-        return driver.findElement(By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']")).isDisplayed();
+    public String checkModalWindowSuccessOrdering(){
+       return driver.findElement(modalWindowText).getText();
     }
     }
 

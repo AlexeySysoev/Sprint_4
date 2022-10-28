@@ -8,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.After;
 import org.junit.Test;
-
+import static org.hamcrest.CoreMatchers.containsString;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,11 +23,12 @@ public class OrderSamokatTests {
     //тестовый набор для поля Фамилия
     private String[] lastName = {"Иванов","Ковалев"};
     //тестовый набор для поля Адрес
-    private String[] adress = {"Кутузовский пр-т, д.38, кв.111","ул.Советская, д.12, кв.43"};
+    private String[] address = {"Кутузовский пр-т, д.38, кв.111","ул.Советская, д.12, кв.43"};
     //тестовый набор для поля Номер телефона
     private String[] phoneNumber = {"+79994445566","+79779632541"};
-    //выбор варианта тестовых данных из массивов name, lastName, adress, phoneNumber.
-    // Для станций метро: 0 - Бульвар Рокоссовского, 1 - Черкизовская
+    //выбор варианта тестовых данных из массивов name, lastName, address, phoneNumber.
+    // Для станций метро: 0 - Бульвар Рокоссовского, 1 - Черкизовская.
+    //Для выбора даты доставки самоката: 0 - 28 октября, 1 - 29 октября.
     //тестовый набор для поля Комментарий для курьера
     private String[] commentsForCourier = {"Я дома с 18 до 22 часов","Домофон не работает - звоните на телефон"};
     private int variantOfTestData;
@@ -34,10 +36,10 @@ public class OrderSamokatTests {
 
     @Before
     public void preSettings() {
-//        System.setProperty("webdriver.chrome.driver","C:/WebDriver/bin/chromedriver.exe");
-//        driver = new ChromeDriver();
-        System.setProperty("webdriver.gecko.driver", "C:/WebDriver/bin/geckodriver.exe");
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver","C:/WebDriver/bin/chromedriver.exe");
+        driver = new ChromeDriver();
+//        System.setProperty("webdriver.gecko.driver", "C:/WebDriver/bin/geckodriver.exe");
+//        driver = new FirefoxDriver();
     }
     @Test
     //Заказ самоката через кнопку "Заказать" в хедере
@@ -51,13 +53,13 @@ public class OrderSamokatTests {
         OrderForm orderForm = new OrderForm(driver);
         orderForm.setInputName(name[variantOfTestData]);
         orderForm.setInputLastNameName(lastName[variantOfTestData]);
-        orderForm.setInputAdress(adress[variantOfTestData]);
+        orderForm.setInputAdress(address[variantOfTestData]);
         orderForm.setInputMetroStationSelect(variantOfTestData);
         orderForm.setInputPhoneNumber(phoneNumber[variantOfTestData]);
         //Жмем кнопку "Далее"
         orderForm.formOneButtonNextClick();
         //Заполняем форму "Про аренду"
-        orderForm.samokatDeliveryDateSelect();
+        orderForm.samokatDeliveryDateSelect(variantOfTestData);
         orderForm.rentDurationSelect();
         orderForm.blackCheckBoxSelect();
         orderForm.greyCheckBoxSelect();
@@ -67,7 +69,7 @@ public class OrderSamokatTests {
         //Жмем кнопку "Да" в модальном окне
         orderForm.modalWindowApproveButtonClick();
 
-        Assert.assertTrue(orderForm.checkModalWindowSuccessOrderIsExist());
+        Assert.assertThat(orderForm.checkModalWindowSuccessOrdering(),containsString("Заказ оформлен"));
 
         }
 
@@ -83,13 +85,13 @@ public class OrderSamokatTests {
         OrderForm orderForm = new OrderForm(driver);
         orderForm.setInputName(name[variantOfTestData]);
         orderForm.setInputLastNameName(lastName[variantOfTestData]);
-        orderForm.setInputAdress(adress[variantOfTestData]);
+        orderForm.setInputAdress(address[variantOfTestData]);
         orderForm.setInputMetroStationSelect(variantOfTestData);
         orderForm.setInputPhoneNumber(phoneNumber[variantOfTestData]);
         //Жмем кнопку "Далее"
         orderForm.formOneButtonNextClick();
         //Заполняем форму "Про аренду"
-        orderForm.samokatDeliveryDateSelect();
+        orderForm.samokatDeliveryDateSelect(variantOfTestData);
         orderForm.rentDurationSelect();
         orderForm.blackCheckBoxSelect();
         orderForm.greyCheckBoxSelect();
@@ -99,7 +101,7 @@ public class OrderSamokatTests {
         //Жмем кнопку "Да" в модальном окне
         orderForm.modalWindowApproveButtonClick();
 
-        Assert.assertTrue(orderForm.checkModalWindowSuccessOrderIsExist());
+        Assert.assertThat(orderForm.checkModalWindowSuccessOrdering(),containsString("Заказ оформлен"));
         }
 
     @After
