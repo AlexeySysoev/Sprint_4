@@ -131,6 +131,8 @@ public class OrderForm {
                 .until(ExpectedConditions.elementToBeClickable(modalWindowApproveButton));
         driver.findElement(modalWindowApproveButton).click();
     }
-
+    public boolean checkModalWindowSuccessOrderIsExist(){
+        return driver.findElement(By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']")).isDisplayed();
+    }
     }
 

@@ -55,6 +55,12 @@ public class MainPage {
     }
     //клик по кнопке "Заказать" в контенте
     public void orderBodyButtonClick(){
+        WebElement element = driver.findElement(orderBodyButton);
+        ((JavascriptExecutor) driver)
+                .executeScript(
+                        "arguments[0].scrollIntoView();",
+                        element
+                );
         driver.findElement(orderBodyButton).click();
     }
     //клик по элементу списка "Вопросы о важном"

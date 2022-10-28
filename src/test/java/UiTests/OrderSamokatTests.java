@@ -3,6 +3,7 @@ import PageObject.OrderForm;
 import org.junit.Assert;
 import org.junit.Before;
 import PageObject.MainPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.After;
@@ -10,6 +11,10 @@ import org.junit.Test;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class OrderSamokatTests {
     //тестовый набор для поля Имя
@@ -62,18 +67,45 @@ public class OrderSamokatTests {
         //Жмем кнопку "Да" в модальном окне
         orderForm.modalWindowApproveButtonClick();
 
+        Assert.assertTrue(orderForm.checkModalWindowSuccessOrderIsExist());
+
         }
 
-//    @Test
+    @Test
 //    //Заказ самоката через кнопку "Заказать" в хедере
-//    public void checkOrderSamokatWithBodyOrderButton(){
-//
-//        }
-//
-//    @After
-//    public void teardown(){
-//            driver.quit();
-//        }
+    public void checkOrderSamokatWithBodyOrderButton(){
+        variantOfTestData = 1;
+        MainPage mainPage = new MainPage(driver);
+        mainPage.open();
+        //Нажимаем кнопку заказать в хедере
+        mainPage.orderBodyButtonClick();
+        //Заполняем форму "Для кого самокат"
+        OrderForm orderForm = new OrderForm(driver);
+        orderForm.setInputName(name[variantOfTestData]);
+        orderForm.setInputLastNameName(lastName[variantOfTestData]);
+        orderForm.setInputAdress(adress[variantOfTestData]);
+        orderForm.setInputMetroStationSelect(variantOfTestData);
+        orderForm.setInputPhoneNumber(phoneNumber[variantOfTestData]);
+        //Жмем кнопку "Далее"
+        orderForm.formOneButtonNextClick();
+        //Заполняем форму "Про аренду"
+        orderForm.samokatDeliveryDateSelect();
+        orderForm.rentDurationSelect();
+        orderForm.blackCheckBoxSelect();
+        orderForm.greyCheckBoxSelect();
+        orderForm.setCommentForCourier(commentsForCourier[variantOfTestData]);
+        //Жмем кнопку формы "Заказать"
+        orderForm.formForRentOrderButtonClick();
+        //Жмем кнопку "Да" в модальном окне
+        orderForm.modalWindowApproveButtonClick();
+
+        Assert.assertTrue(orderForm.checkModalWindowSuccessOrderIsExist());
+        }
+
+    @After
+    public void teardown(){
+            driver.quit();
+        }
 
 
 }
