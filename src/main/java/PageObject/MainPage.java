@@ -71,7 +71,11 @@ public class MainPage {
                         element
                 );
     }
-    public void wait (int questionNumber){
+    public void waitQuestion (int questionNumber){
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(aboutImpotantQuestionXpath[questionNumber]));
+    }
+    public void waitAnswerText (int questionNumber){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(aboutImpotantAnswerXpath[questionNumber]));
 

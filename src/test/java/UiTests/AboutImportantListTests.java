@@ -31,11 +31,10 @@ public class AboutImportantListTests {
     @Before
     public void preSettings(){
         System.setProperty("webdriver.chrome.driver","C:/WebDriver/bin/chromedriver.exe");
-        //System.setProperty("webdriver.gecko.driver","C:/WebDriver/bin/geckodriver.exe");
         driver = new ChromeDriver();
-        /*driver = new FirefoxDriver();
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setAcceptInsecureCerts(false);*/
+//        System.setProperty("webdriver.gecko.driver","C:/WebDriver/bin/geckodriver.exe");
+//        driver = new FirefoxDriver();
+
 
     }
 
@@ -45,8 +44,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
 
     }
@@ -57,8 +57,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
 
     }
@@ -69,10 +70,10 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
-
     }
     @Test
     public void checkAboutImportantQuestionsDateOfOrderAnswerText() {
@@ -80,8 +81,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
     }
     @Test
@@ -90,8 +92,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
     }
 
@@ -101,8 +104,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
     }
 
@@ -112,8 +116,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
     }
     @Test
@@ -122,8 +127,9 @@ public class AboutImportantListTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.scroll(questionNumber);
+        mainPage.waitQuestion(questionNumber);
         mainPage.liAboutImportantClick(questionNumber);
-        mainPage.wait(questionNumber);
+        mainPage.waitAnswerText(questionNumber);
         Assert.assertEquals(expectedArr[questionNumber], mainPage.liAnswerPanelGetText(questionNumber));
     }
     @After
