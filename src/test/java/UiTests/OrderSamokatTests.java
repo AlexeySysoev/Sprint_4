@@ -14,9 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-
 public class OrderSamokatTests {
     //тестовый набор для поля Имя
     private String[] name = {"Сергей","Андрей"};
@@ -33,9 +31,8 @@ public class OrderSamokatTests {
     private String[] commentsForCourier = {"Я дома с 18 до 22 часов","Домофон не работает - звоните на телефон"};
     private int variantOfTestData;
     private WebDriver driver;
-
     @Before
-    public void preSettings() {
+    public void preSettings(){
         System.setProperty("webdriver.chrome.driver","C:/WebDriver/bin/chromedriver.exe");
         driver = new ChromeDriver();
 //        System.setProperty("webdriver.gecko.driver", "C:/WebDriver/bin/geckodriver.exe");
@@ -68,13 +65,10 @@ public class OrderSamokatTests {
         orderForm.formForRentOrderButtonClick();
         //Жмем кнопку "Да" в модальном окне
         orderForm.modalWindowApproveButtonClick();
-
         Assert.assertThat(orderForm.checkModalWindowSuccessOrdering(),containsString("Заказ оформлен"));
-
         }
-
     @Test
-//    //Заказ самоката через кнопку "Заказать" в хедере
+    //Заказ самоката через кнопку "Заказать" в хедере
     public void checkOrderSamokatWithBodyOrderButton(){
         variantOfTestData = 1;
         MainPage mainPage = new MainPage(driver);
@@ -100,14 +94,10 @@ public class OrderSamokatTests {
         orderForm.formForRentOrderButtonClick();
         //Жмем кнопку "Да" в модальном окне
         orderForm.modalWindowApproveButtonClick();
-
         Assert.assertThat(orderForm.checkModalWindowSuccessOrdering(),containsString("Заказ оформлен"));
         }
-
     @After
     public void teardown(){
             driver.quit();
         }
-
-
 }

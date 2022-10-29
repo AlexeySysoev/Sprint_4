@@ -1,5 +1,4 @@
 package PageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-
 public class OrderForm {
     /* Локаторы формы "Для кого самокат"*/
     //инпут Имя
@@ -56,7 +54,6 @@ public class OrderForm {
         this.driver = driver;
     }
     /* Форма "Для кого самокат" */
-
     //ввод значения в поле Имя
     public void setInputName(String name){
         new WebDriverWait(driver, Duration.ofSeconds(5))
@@ -103,7 +100,7 @@ public class OrderForm {
         driver.findElement(dateOfDeliverySelect[variantOfTestData]).click();
     }
     //выбор срока аренды
-    public void rentDurationSelect() {
+    public void rentDurationSelect(){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(rentDurationInput));
         driver.findElement(rentDurationInput).click();
@@ -140,5 +137,5 @@ public class OrderForm {
     public String checkModalWindowSuccessOrdering(){
        return driver.findElement(modalWindowText).getText();
     }
-    }
+}
 
